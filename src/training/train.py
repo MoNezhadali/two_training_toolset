@@ -3,6 +3,7 @@ Train Iris classifier.
 
 Don forget to fill this place with the description of the script.
 """
+
 import os
 import sys
 import yaml
@@ -56,10 +57,13 @@ def build_pipeline(cfg) -> Pipeline:
     return Pipeline(
         [
             ("preprocessor", preprocessor),
-            ("model", LogisticRegression(
-                max_iter=cfg.get("logreg_max_iter", 300),
-                multi_class="multinomial",
-            )),
+            (
+                "model",
+                LogisticRegression(
+                    max_iter=cfg.get("logreg_max_iter", 300),
+                    multi_class="multinomial",
+                ),
+            ),
         ]
     )
 
@@ -111,7 +115,9 @@ def main() -> None:
     required_keys = {"model_version"}
     missing = required_keys - set(cfg)
     if missing:
-        sys.exit(f"[ERROR] Missing required config keys: {', '.join(sorted(missing))}")
+        sys.exit(
+            "[ERROR] Missing required config " f"keys: {', '.join(sorted(missing))}"
+        )
 
     train(cfg)
 
