@@ -16,5 +16,6 @@ dist/
 
 # Logs and artifacts
 artifacts/
+.metaflow/
 .pytest_cache/
 .mypy_cache/
