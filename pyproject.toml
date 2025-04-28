@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "two_mlops_toolset"
+version = "1.0.0"
+description = "Training workflows under src/."
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["src", "src.*"]
+
+[tool.ruff]
+line-length = 88
+fix = true
+target-version = "py310"
+cache-dir = ".ruff_cache"
+exclude = ["tests/"]
+
+[tool.ruff.format]
+quote-style = "double"
+docstring-code-format = true
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+unfixable = []
+ignore = [
+    "ERA001",    # Commented-out code
+    "D401",      # First line of docstring should be in imperative mood
+    "D104",      # Missing docstring in public package
+    "D205",      # 1 blank line required between summary line and description
+    "D404",      # First word of the docstring should not be "This"
+    "D203",      # incorrect-blank-line-before-class
+    "D212",      # multi-line-summary-first-line
+]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "W",   # pycodestyle warnings
+    "D",   # pydocstyle
+]
+
+[tool.ruff.lint.isort]
+force-single-line = false
+combine-as-imports = true
+known-first-party = ["tests", "src"]
+known-third-party = ["docker"]
