@@ -15,7 +15,7 @@ dist/
 *.egg-info/
 
 # Logs and artifacts
-artifacts/
+# artifacts/
 .metaflow/
 .pytest_cache/
 .mypy_cache/
