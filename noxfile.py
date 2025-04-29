@@ -1,8 +1,5 @@
 """Noxfile to run automation tests."""
 
-# Standard library imports
-import os
-
 # Third party imports
 import nox
 
@@ -20,7 +17,7 @@ def tests(session):
     session.install("-r", "requirements.txt")
     session.install("-r", "validation_requirements.txt")
     # Run tests
-    session.run("bash", "tests" + os.sep + "unit_tests", external=True)
+    session.run("pytest", "tests/unit_tests")
 
 
 @nox.session
