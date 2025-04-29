@@ -11,7 +11,7 @@ fi
 echo "Bandit Scan Complete. No issues found."
 
 echo "Running pip-audit"
-pip-audit -r $SCOPE/requirements.txt
+pip-audit -r requirements.txt
 excod=$?
 
 if [ $excod -eq 1 ]; then
