@@ -19,6 +19,7 @@ dist/
 .metaflow/
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
 
 # IDE and editor directories
 .vscode/
