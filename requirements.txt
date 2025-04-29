@@ -2,8 +2,8 @@ fastapi== 0.115.12
 joblib==1.4.2
 loguru==0.7.3
 metaflow==2.15.9 # This needs not to be strict since it is only used in the training script
+pandas==2.2.3
 prometheus-fastapi-instrumentator==7.1.0
 pydantic==2.11.3
-requests==2.32.0
-scikit-learn==1.4.2
+scikit-learn==1.5.2
 uvicorn[standard]==0.34.2

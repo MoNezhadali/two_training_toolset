@@ -3,7 +3,11 @@ from fastapi.testclient import TestClient
 from unittest.mock import patch
 
 from src.serve.api_utils.authentication import dummy_authenticator
-from src.serve.app import app, MODEL_VERSION, SPECIES
+from src.serve.api_utils.config import load_config
+from src.serve.app import app
+
+config = load_config()
+
 
 client = TestClient(app)
 
@@ -43,8 +47,8 @@ class TestIrisApp:
         assert response.status_code == 200
         body = response.json()
         assert body["prediction"] == pred_idx
-        assert body["prediction_label"] == SPECIES[pred_idx]
-        assert body["model_version"] == MODEL_VERSION
+        assert body["prediction_label"] == config.model.species[pred_idx]
+        assert body["model_version"] == config.model.version
         assert body["request_id"] == "test-uuid"
 
     def test_authentication_failure(self):

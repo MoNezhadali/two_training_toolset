@@ -15,10 +15,11 @@ dist/
 *.egg-info/
 
 # Logs and artifacts
-artifacts/
+# artifacts/
 .metaflow/
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
 
 # IDE and editor directories
 .vscode/

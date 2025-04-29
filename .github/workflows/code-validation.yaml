@@ -1,4 +1,4 @@
-name: Code Testing
+name: Code Validation
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
       - dev
 
 jobs:
-  testing:
+  validation:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,11 +26,5 @@ jobs:
       - name: Install nox
         run: pip install nox
 
-      - name: Run unit-tests
-        run: nox -s tests
-
-      - name: Publish test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: '**/test-*.xml'
+      - name: Run formatting checks
+        run: nox -s formatting

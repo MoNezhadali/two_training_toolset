@@ -25,3 +25,4 @@ class IrisResponse(BaseModel):
     prediction_label: Literal["setosa", "versicolor", "virginica"]
     request_id: str
     model_version: str
+    api_version: str
