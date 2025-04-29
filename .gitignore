@@ -22,3 +22,4 @@ artifacts/
 
 # IDE and editor directories
 .vscode/
+.flake8
