@@ -11,9 +11,6 @@ on:
       - main
       - dev
 
-env:
-  FASTAPI_PORT: 4000
-
 jobs:
   testing:
     runs-on: ubuntu-latest
