@@ -1,8 +1,5 @@
 """A FastAPI application for serving a machine learning model."""
 
-import os
-from pathlib import Path
-
 import joblib
 import numpy as np
 import uvicorn
@@ -12,22 +9,19 @@ from prometheus_fastapi_instrumentator import Instrumentator
 
 from src.serve.api_utils.authentication import dummy_authenticator
 from src.serve.api_utils.base_app import router as health_router
+from src.serve.api_utils.config import load_config
 from src.serve.api_utils.schemas import IrisRequest, IrisResponse
 
-MODEL_PATH = Path(os.getenv("MODEL_PATH", "artifacts/model-v1.0.0.joblib"))
-MODEL_VERSION = "1.0.0"
-SPECIES = ["setosa", "versicolor", "virginica"]
+# Load configuration
+config = load_config()
 
-if not MODEL_PATH.exists():
-    raise RuntimeError(f"Model artifact not found at {MODEL_PATH}")
-
-logger.info(f"Loading model from {MODEL_PATH}")
-model = joblib.load(MODEL_PATH)
+logger.info(f"Loading model from {config.model.path}")
+model = joblib.load(config.model.path)
 
 
 app = FastAPI(
     title="Iris Inference Service",
-    version=MODEL_VERSION,
+    version=config.version,
     description="Predict Iris species based on flower measurements.",
 )
 
@@ -71,9 +65,10 @@ async def predict(
 
         response = IrisResponse(
             prediction=pred_idx,
-            prediction_label=SPECIES[pred_idx],
+            prediction_label=config.model.species[pred_idx],
             request_id=request_id,
-            model_version=MODEL_VERSION,
+            model_version=config.model.version,
+            api_version=config.version,
         )
 
         logger.info(
@@ -92,6 +87,6 @@ async def predict(
 if __name__ == "__main__":
     uvicorn.run(
         app,
-        host="0.0.0.0",
-        port=8000,
+        host=config.server.host,
+        port=config.server.port,
     )
