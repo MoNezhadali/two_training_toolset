@@ -1,4 +1,4 @@
-name: Code Testing
+name: Code security
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
       - dev
 
 jobs:
-  testing:
+  security:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,9 +28,3 @@ jobs:
 
       - name: Run security checks
         run: nox -s security
-
-      - name: Publish test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: '**/test-*.xml'
