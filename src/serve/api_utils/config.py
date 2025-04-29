@@ -20,7 +20,6 @@ class ServerConfig(BaseModel):
     """Configuration for the FastAPI server."""
 
     host: str
-    port: int
 
 
 class AppConfig(BaseModel):

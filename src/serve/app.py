@@ -1,5 +1,7 @@
 """A FastAPI application for serving a machine learning model."""
 
+import os
+
 import joblib
 import numpy as np
 import uvicorn
@@ -14,6 +16,7 @@ from src.serve.api_utils.schemas import IrisRequest, IrisResponse
 
 # Load configuration
 config = load_config()
+FASTAPI_PORT = int(os.getenv("FASTAPI_PORT", "5000"))
 
 logger.info(f"Loading model from {config.model.path}")
 model = joblib.load(config.model.path)
@@ -88,5 +91,5 @@ if __name__ == "__main__":
     uvicorn.run(
         app,
         host=config.server.host,
-        port=config.server.port,
+        port=FASTAPI_PORT,
     )
