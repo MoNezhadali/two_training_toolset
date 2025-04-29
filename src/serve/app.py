@@ -3,7 +3,7 @@
 import os
 
 import joblib
-import numpy as np
+import pandas as pd
 import uvicorn
 from fastapi import Depends, FastAPI, HTTPException, Request, status
 from loguru import logger
@@ -61,8 +61,21 @@ async def predict(
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
     try:
-        features = np.array(
-            [[data.sepal_length, data.sepal_width, data.petal_length, data.petal_width]]
+        features = pd.DataFrame(
+            [
+                [
+                    data.sepal_length,
+                    data.sepal_width,
+                    data.petal_length,
+                    data.petal_width,
+                ]
+            ],
+            columns=[
+                "sepal length (cm)",
+                "sepal width (cm)",
+                "petal length (cm)",
+                "petal width (cm)",
+            ],
         )
         pred_idx = int(model.predict(features)[0])
 
