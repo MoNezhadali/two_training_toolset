@@ -27,17 +27,7 @@ def formatting(session):
     session.install("-r", "requirements.txt")
     session.install("-r", "validation_requirements.txt")
     # Run formatting checks
-    session.run("bash", f"{CI_SCRIPTS_DIR}/check_formatting.sh", external=True)
-
-
-@nox.session
-def linting(session):
-    """Run linter checks in current interpreter for now."""
-    # Install nox requirements
-    session.install("-r", "requirements.txt")
-    session.install("-r", "validation_requirements.txt")
-    # Run linter
-    session.run("bash", f"{CI_SCRIPTS_DIR}/linting.sh", external=True)
+    session.run("bash", f"{CI_SCRIPTS_DIR}/check_format.sh", external=True)
 
 
 @nox.session
