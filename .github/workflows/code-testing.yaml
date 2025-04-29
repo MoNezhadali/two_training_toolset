@@ -1,0 +1,39 @@
+name: Code Testing
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - "feature/**"
+  pull_request:
+    branches:
+      - main
+      - dev
+
+env:
+  FASTAPI_PORT: 4000
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install nox
+        run: pip install nox
+
+      - name: Run unit-tests
+        run: nox -s tests
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: '**/test-*.xml'
