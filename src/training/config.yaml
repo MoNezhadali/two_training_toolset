@@ -1,6 +1,6 @@
 # config.yaml
 workflow_class: IrisClassifier
-model_version: "1.0"
+model_version: "1.0.0"
 output_dir: "artifacts"
 sepal_bins: 3
 petal_scaler_range: [0.0, 1.0]
