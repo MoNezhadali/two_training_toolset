@@ -1,0 +1,17 @@
+{
+  "model_version": "1.0.0",
+  "accuracy": 0.8,
+  "trained_at": "2025-04-29T11:50:45Z",
+  "sklearn_version": "1.5.2",
+  "config": {
+    "workflow_class": "IrisClassifier",
+    "model_version": "1.0.0",
+    "output_dir": "artifacts",
+    "sepal_bins": 3,
+    "petal_scaler_range": [
+      0.0,
+      1.0
+    ],
+    "logreg_max_iter": 300
+  }
+}
