@@ -60,7 +60,7 @@ async def predict(
     request_id = data.request_id
 
     if not verified_token:
-        logger.warning(f"Unauthorized access attempt. " f"Request ID: {request_id}")
+        logger.warning(f"Unauthorized access attempt. Request ID: {request_id}")
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
     try:
