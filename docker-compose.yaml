@@ -8,4 +8,4 @@ services:
       - APP_CONFIG_PATH=src/serve/config.yaml
       - FASTAPI_PORT=${FASTAPI_PORT}
     ports:
-      - "5000:${FASTAPI_PORT}"
+      - "5050:${FASTAPI_PORT}"
