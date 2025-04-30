@@ -66,7 +66,11 @@ pytest tests/unit_tests/training/
 ```
 
 ## Serving the model
-In order to serve the ML model, a FastAPI app is designed. Similar to the training pipeline, it is tried to be modular. In order to run the API locally, you can set the corresponding config file (e.g. `src/serve/config.yaml`) set the `FASTAPI_PORT` and run the app:
+
+In order to serve the ML model, a FastAPI app is designed to serve the ML model and is run using Uvicorn. Similar to the training pipeline, it is tried to be modular. A dummy authentication mechanism is included which can substituted by JWT in live.
+
+In order to run the API locally, you can set the corresponding config file (e.g. `src/serve/config.yaml`) set the `FASTAPI_PORT` and run the app:
+
 ```bash
 export FASTAPI_PORT=5050
 python -m src.serve.app
@@ -104,6 +108,8 @@ The three CI pipelines are automatically run when a Pull Request is created for 
 1. `code-testing`: runs all the unit
 2. `code-validation`: Runs ruff for linting and formatting, (just a template more can be done here)
 3. `code-security`: Runs bandit on the source code and pip-audit on the dependencies (also a template more can be done)
+
+In addition some automation shell scripts are added for streamlining the quality check procedure (e.g. `.github/scripts/check_format.sh`, `.github/scripts/security.sh`). They are used together with `noxfile.py` in the pipelines.
 
 ## Containerization
 
@@ -146,3 +152,5 @@ Both technical monitoring and business monitoring can be explained briefly here.
 As for technical monitoring there are several choices depending on the need, scale, budget, ... (e.g. Datadog, NewRelic, Prometheus, ...). These tools can track metrics such as CPU usage, memory consumption, request latency, error rates, etc. In the code provided, a basic prototype of using Prometheus is provided.
 
 As for business monitoring, one can use tools like Grafana to create dashboards for business monitoring (transaction volume, revenue generation, ...) in realtime.
+
+As for logging, loguru is used because of its ease of use, but proper logging and log-handling should be added on live.
